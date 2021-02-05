@@ -9,35 +9,43 @@
 import Foundation
 import UIKit
 
-@IBDesignable class CheckMarkLine: UIView {
- 
-    let gradient = CAGradientLayer()
+@IBDesignable
 
-    @IBInspectable var animationDuration: Double = 2 {
+/// Framework: Check Mark, you can change the color, size, have animation and gradient.
+public class CheckMarkLine: UIView {
+    
+    // MARK: - Attributes
+
+    /// Gradient for mark
+    private let gradient = CAGradientLayer()
+    
+    
+    /// Size line
+    @IBInspectable public var sizeLine: CGFloat = 3 {
         didSet {
             setup()
         }
     }
     
-    @IBInspectable var sizeLine: CGFloat = 3 {
+    /// Color line
+    /// Attention: use color or gradient
+    @IBInspectable public var lineBackgroundColor: UIColor = .black {
         didSet {
             setup()
         }
     }
     
-    @IBInspectable var lineBackgroundColor: UIColor = .black {
-           didSet {
-               setup()
-           }
-       }
+    /// Duration for animation
+    /// - Note: Default : 2
+    public var durationAnimation = 2{
+        didSet{
+            print(self.durationAnimation)
+            self.animation.duration = CFTimeInterval(durationAnimation)
+        }
+    }
     
-    @IBInspectable var addAnimation: Bool = false {
-           didSet {
-               setup()
-           }
-       }
-
-    lazy var  path: UIBezierPath = {
+    /// Draw of line
+    private lazy var  path: UIBezierPath = {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: self.bounds.maxY * 0.06, y: self.bounds.midY + self.bounds.midY * 0.2))
         path.addLine(to: CGPoint(x: self.bounds.maxX * 0.35, y:  self.bounds.maxY * 0.9))
@@ -46,52 +54,82 @@ import UIKit
         return path
     }()
     
-    let animation: CABasicAnimation = {
+    /// Animation of line
+    private lazy var animation: CABasicAnimation = {
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
+        animation.duration = CFTimeInterval(self.durationAnimation)
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
         return animation
     }()
     
-    lazy var shapeLayer:CAShapeLayer = {
+    /// Properties for create line
+    private lazy var shapeLayer:CAShapeLayer = {
         let shapeLayer = CAShapeLayer()
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.lineWidth = 15
         shapeLayer.lineCap = CAShapeLayerLineCap.round
-        
         shapeLayer.path = path.cgPath
-        
-        
-        self.backgroundColor = .clear
         
         return shapeLayer
     }()
     
+    /// isAnimation: true or false, default duration animation: 2
+    /// - Warning : Set duration animation first
+    /// - Precondition: Duration animation
+    /// - Note: Default 2
+    public var isAnimation = false{
+        didSet{
+            if(isAnimation){
+                shapeLayer.add(animation, forKey: "MuAnimation")
+                animation.isRemovedOnCompletion = true
+            }
+        }
+    }
+    
+    // MARK: - Constructor
+    
+    /// Frame for view
+    /// - Parameter frame: CGRect(position, size)
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    /// Updatee view in storyboard
+    public override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+
+    }
+    
+    
+    // MARK: - Methods
+    
+    /// Update properties of line
     private func setup() {
-        self.animation.duration = animationDuration
         self.shapeLayer.lineWidth = sizeLine
         self.shapeLayer.strokeColor = lineBackgroundColor.cgColor
         self.layer.addSublayer(shapeLayer)
-        layer.addSublayer(gradient)
-
-        if(addAnimation){
-            shapeLayer.add(animation, forKey: "MuAnimation")
-        }
+        layer.insertSublayer(gradient, at: 0)
         
-        self.addGradient()
-
     }
     
     
-    
-    private func addGradient() {
-        gradient.colors = [UIColor.orange.cgColor, UIColor.red.cgColor]
+    /// User set colors for gradient
+    /// - Parameter colors: Color for gradient
+    public func setColorsGradient(colors: [UIColor]) {
+        
+        gradient.colors = colors.map({ $0.cgColor })
         gradient.frame = self.bounds
-        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
         gradient.mask = shapeLayer
     }
- 
     
 }
