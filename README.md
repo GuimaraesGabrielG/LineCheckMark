@@ -69,7 +69,7 @@ self.view.addSubview(lineCheckMark)
 
 Drop me an email if you have any  doubt
 
-[Email](0609guimaraes@gmail.com)
+[Email](mailto:0609guimaraes@gmail.com)
 
 ## License
 
