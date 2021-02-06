@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-@IBDesignable
 
 /// Framework: Check Mark, you can change the color, size, have animation and gradient.
-public class CheckMarkLine: UIView {
+@IBDesignable
+open class LineCheckMark: UIView {
     
     // MARK: - Attributes
 
@@ -21,7 +21,7 @@ public class CheckMarkLine: UIView {
     
     
     /// Size line
-    @IBInspectable public var sizeLine: CGFloat = 3 {
+    @IBInspectable open var sizeLine: CGFloat = 3 {
         didSet {
             setup()
         }
@@ -29,7 +29,7 @@ public class CheckMarkLine: UIView {
     
     /// Color line
     /// Attention: use color or gradient
-    @IBInspectable public var lineBackgroundColor: UIColor = .black {
+    @IBInspectable open var lineBackgroundColor: UIColor = .black {
         didSet {
             setup()
         }
@@ -93,19 +93,24 @@ public class CheckMarkLine: UIView {
     /// - Parameter frame: CGRect(position, size)
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.setup()
         
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.setup()
     }
     
     /// Updatee view in storyboard
-    public override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setup()
 
     }
+
     
     
     // MARK: - Methods
@@ -122,7 +127,7 @@ public class CheckMarkLine: UIView {
     
     /// User set colors for gradient
     /// - Parameter colors: Color for gradient
-    public func setColorsGradient(colors: [UIColor]) {
+    open func setColorsGradient(colors: [UIColor]) {
         
         gradient.colors = colors.map({ $0.cgColor })
         gradient.frame = self.bounds
@@ -132,3 +137,4 @@ public class CheckMarkLine: UIView {
     }
     
 }
+
