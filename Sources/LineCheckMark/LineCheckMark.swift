@@ -93,21 +93,18 @@ open class LineCheckMark: UIView {
     /// - Parameter frame: CGRect(position, size)
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
         
         
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setup()
     }
     
     /// Updatee view in storyboard
     
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        self.setup()
+    public override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
 
     }
 
