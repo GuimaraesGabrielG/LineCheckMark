@@ -1,11 +1,16 @@
 # LineCheckMark
 
-<img src="https://user-images.githubusercontent.com/47581150/107129616-6054e100-68a5-11eb-9825-7f864dda87c9.gif" alt="Kapture 2021-02-06 at 17 57 56" style="zoom: 20%;" />
-
-<img src="https://user-images.githubusercontent.com/47581150/107129623-71055700-68a5-11eb-9a60-bdc9e5e5abbb.gif" alt="Kapture 2021-02-06 at 17 46 13" style="zoom: 20%;" />
-
-<img src="https://user-images.githubusercontent.com/47581150/107129624-72cf1a80-68a5-11eb-9806-8cd9f2d7b918.gif" alt="Kapture 2021-02-06 at 17 35 07" style="zoom: 20%;" />
-
+<table id='pictures'>
+<td >
+<img src="https://user-images.githubusercontent.com/47581150/107129616-6054e100-68a5-11eb-9825-7f864dda87c9.gif" alt="Kapture 2021-02-06 at 17 57 56" width="266" height="145,5" />
+</td>
+<td >
+<img src="https://user-images.githubusercontent.com/47581150/107129623-71055700-68a5-11eb-9a60-bdc9e5e5abbb.gif" alt="Kapture 2021-02-06 at 17 46 13" width="266" height="145,5" />
+</td>
+<td >
+<img src="https://user-images.githubusercontent.com/47581150/107129624-72cf1a80-68a5-11eb-9806-8cd9f2d7b918.gif" alt="Kapture 2021-02-06 at 17 35 07" width="266" height="145,5" />
+</td>
+</table>
 
 
 LineCheckMark is a library for rendering a check mark
